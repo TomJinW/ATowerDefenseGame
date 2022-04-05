@@ -19,6 +19,10 @@ public class BtnTowerController : MonoBehaviour
     public int index = 0;
     public BtnTowerManager towerManager;
 
+    public int buttonType = 0;
+    private Base gameBase;
+    private GameManager gameManager;
+
     public void setIndicator(bool enabled) {
         indicator.gameObject.SetActive(enabled);
     }
@@ -36,14 +40,36 @@ public class BtnTowerController : MonoBehaviour
     }
 
     public void onPointerClicked() {
-        Debug.Log(index);
-        towerManager.setActive(this.index);
+        if (buttonType == 0)
+        {
+            towerManager.setActive(this.index);
+        }
+        else if (buttonType == 1)
+        {
+            if (Internals.gems >= 5) {
+                Internals.gems -= 5;
+                gameBase.health = (gameBase.health + 50.0f).Bounds(0, 100);
+            }
+        }
+        else if (buttonType == 2)
+        {
+            if (Internals.gems >= 5)
+            {
+                Internals.gems -= 5;
+                gameManager.money += 500;
+            }
+        }
+        else {
+
+        }
     }
    
     // Start is called before the first frame update
     void Start()
     {
-        if (index == 0)
+        gameBase = GameObject.FindGameObjectWithTag("Base").GetComponent<Base>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        if (index == 0 && buttonType == 0)
         {
             setIndicator(true);
         }

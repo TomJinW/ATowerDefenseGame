@@ -19,6 +19,13 @@ public class PauseButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (Time.timeScale != 0) {
+                Time.timeScale = 0;
+                mainMenuCanvas.gameObject.SetActive(true);
+            }
+        }
     }
+
+
 }

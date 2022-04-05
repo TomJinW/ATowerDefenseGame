@@ -6,6 +6,7 @@ public class BtnTowerManager : MonoBehaviour
 {
 
     public BtnTowerController[] towerControllers;
+    [SerializeField] ConstructionManager constructionManager;
 
     public void setActive(int index) {
         
@@ -13,6 +14,7 @@ public class BtnTowerManager : MonoBehaviour
             tower.setIndicator(false);
         }
         towerControllers[index].setIndicator(true);
+        constructionManager.buildPrefabIndex = index;
     }
 
     // Start is called before the first frame update

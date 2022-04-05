@@ -12,7 +12,7 @@ public class DamageBase : MonoBehaviour
         if(isBase)
         {
             Debug.Log("Hit base");
-            GameObject baseTower = GameObject.Find("Base");
+            GameObject baseTower = GameObject.Find("darkcastle");
             baseTower.GetComponent<Base>().OnHit(damage);
         }
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &571188068
 GameObject:
@@ -297,7 +297,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786707191
 GameObject:
@@ -363,7 +363,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2332916516646099063
 PrefabInstance:
@@ -435,6 +435,50 @@ PrefabInstance:
     - target: {fileID: 4649972243833359578, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410713378535164, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410713724381793, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410713912696530, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410714032963465, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_text
+      value: Kingdom VS Zombies
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410714062116046, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410714677336241, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: titleScreenType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410714820042350, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: titleScreenTypes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410714874521214, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410715052870909, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410715214620495, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924410715426340420, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6112896391809269089, guid: c4fa00b84baf0416c84401e996d401a1, type: 3}
       propertyPath: m_IsActive

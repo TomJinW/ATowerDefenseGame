@@ -55,9 +55,8 @@ public class TitleScreenOptionController : MonoBehaviour
                 else
                 {
                     Time.timeScale = 1;
-                    //SceneManager.LoadScene("Patrick");
+                    Internals.zombieHPScaler = 1.0f;
                     SceneManager.LoadScene("SeansScene");
-
                 }
 
                 break;
@@ -123,5 +122,12 @@ public class TitleScreenOptionController : MonoBehaviour
         {
             processSelection();
         }
+        //if (Input.GetKeyDown(KeyCode.Escape)) {
+        //    if (titleScreenType == TitleScreenTypes.Pause)
+        //    {
+        //        Time.timeScale = 1;
+        //        titleScreenCanvas.gameObject.SetActive(false);
+        //    }
+        //}
     }
 }

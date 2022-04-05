@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class PurchaseItem : MonoBehaviour
 {
+    public int gemScale = 1;
     public string itemName = "Pokeball";
     public DialogBoxController dialogBoxController;
     public void PointerDown() {
         if (!Internals.dialogOpened) {
             Internals.dialogOpened = true;
+            dialogBoxController.gemScale = gemScale;
             dialogBoxController.iconImage.gameObject.GetComponent<Image>().sprite = dialogBoxController.iconSprites[0];
             dialogBoxController.btnEnabled = new bool[] { true, true };
             dialogBoxController.gameObject.SetActive(true);
@@ -19,7 +21,7 @@ public class PurchaseItem : MonoBehaviour
             dialogBoxController.btn1Text = "Sure";
             dialogBoxController.btn2Text = "Nope";
             dialogBoxController.setText();
-            dialogBoxController.transform.position = this.transform.position;
+            dialogBoxController.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+70, this.transform.position.z);
         }
 
     }

@@ -45,7 +45,7 @@ public static class UtilFuncs
     /// Equals <see cref="KeyCode.None"/> if none of them were found to be down.</param>
     /// <param name="codes">The keys you want to check. Will return the first one down, in the order you pass them.</param>
     /// <returns>Whether any of the keys in <paramref name="codes"/> was down or not.</returns>
-    private static bool GetMultiKeyDown(out KeyCode keyDown, params KeyCode[] codes)
+    public static bool GetMultiKeyDown(out KeyCode keyDown, params KeyCode[] codes)
     {
         for (int i = 0; i < codes.Length; i++)
         {
@@ -58,5 +58,18 @@ public static class UtilFuncs
 
         keyDown = KeyCode.None;
         return false;
+    }
+
+    /// <summary>
+    /// Divides two vectors component-wise.
+    /// </summary>
+    public static Vector3 InverseScale(Vector3 a, Vector3 b) => new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
+
+    /// <summary>
+    /// Scales this transform so that it's sized as if its parent had a scale of (1,1,1).
+    /// </summary>
+    public static void NegateParentScale(this Transform tform)
+    {
+        tform.localScale = InverseScale(tform.localScale, tform.parent.localScale);
     }
 }

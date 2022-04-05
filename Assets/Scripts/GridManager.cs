@@ -12,13 +12,13 @@ public class GridManager : MonoBehaviour
     [Tooltip("The dimensions of the grid; y = z, since the grid is flat along the XZ plane.")]
     [SerializeField] [Min(1)] private Vector2Int gridSize;
     [Tooltip("The distance between each tile's center in the grid.")]
-    [SerializeField] private float tileSpacing;
+    [SerializeField] private Vector2 tileSpacing;
     [Tooltip("The distance between each tile's edge in the grid. If 0, a sphere centered on a tile would touch " +
         "its orthogonal neighbors.")]
-    [SerializeField] [Min(0)] private float tilePadding;
+    [SerializeField] [Min(0)] private Vector2 tilePadding;
 
     public Vector2Int GridSize { get => gridSize; }
-    public float TileSpacing { get => tileSpacing; }
+    public Vector2 TileSpacing { get => tileSpacing; }
 
     private GridTile[,] tiles;
 
@@ -39,11 +39,12 @@ public class GridManager : MonoBehaviour
             //X position
             for (int x = 0; x < gridSize.x; x++)
             {
-                Vector3 pos = new Vector3(tileSpacing * x, 0, tileSpacing * z);
+                Vector3 pos = new Vector3(tileSpacing.x * x, 0, tileSpacing.y * z);
                 GridTile tile = Instantiate(tilePrefab, pos + transform.position, Quaternion.identity, transform);
                 tile.name = $"Tile [{x}, {z}]";
                 tile.InitIndex(x, z);
-                tile.transform.localScale *= tileSpacing - tilePadding;
+                Vector2 paddedSpacing = tileSpacing - tilePadding;
+                tile.transform.localScale = Vector3.Scale(tile.transform.localScale, new Vector3(paddedSpacing.x, 1, paddedSpacing.y));
                 tiles[x, z] = tile;
             }
         }
@@ -64,7 +65,7 @@ public class GridManager : MonoBehaviour
 
     public Vector3 GetGridLinePos(Vector2Int tileIndex, GridDirection dir)
     {
-        Vector2Int dirVec = UtilFuncs.GridDirToV2Int(dir);
-        return transform.position + new Vector3(dirVec.x, 0, dirVec.y) * (TileSpacing / 2);
+        Vector2 halfSpaceInDir = UtilFuncs.GridDirToV2Int(dir) * (tileSpacing / 2);
+        return tiles[tileIndex.x, tileIndex.y].transform.position + new Vector3(halfSpaceInDir.x, 0, halfSpaceInDir.y);
     }
 }

@@ -34,6 +34,8 @@ static class Internals
 {
     public static int winTime = 0;
     public static bool dialogOpened = false;
+    public static int gems = 0;
+    public static float zombieHPScaler = 1.0f;
 }
 
 static class Constants

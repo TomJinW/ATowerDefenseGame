@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class DialogBoxController : MonoBehaviour
 {
+    public int gemScale = 1;
+
     public string titleBarText = "";
     public string mainText = "";
     public string subText = "";
@@ -70,6 +72,7 @@ public class DialogBoxController : MonoBehaviour
     }
 
     public void btn1Clicked() {
+        Internals.gems += 5 * gemScale;
         iconImage.gameObject.GetComponent<Image>().sprite = iconSprites[1];
         titleBarText = "Success";
         mainText = "You have successfully purchased this item.";

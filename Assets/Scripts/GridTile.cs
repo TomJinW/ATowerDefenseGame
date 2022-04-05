@@ -14,6 +14,7 @@ public class GridTile : MonoBehaviour
     [SerializeField] private List<GridTile> adjacentTiles = new List<GridTile>();
 #endif
     [Header("Normal Fields")]
+    [SerializeField] private Collider tileCollider;
     [SerializeField] private Renderer tileRenderer;
     [SerializeField] private Material unselectedMat;
     [SerializeField] private Material selectedMat;
@@ -21,17 +22,22 @@ public class GridTile : MonoBehaviour
     public Vector2Int IndexInGrid { get; private set; }
 
     private Dictionary<GridDirection, GridTile> tileAdj = new Dictionary<GridDirection, GridTile>();
+    private GameObject occupant;
 
     //--- Methods ---//
     private void OnEnable()
     {
         ConstructionManager.cursorStateChange += OnPlacingStateChange;
         ConstructionManager.tileHover += OnTileHover;
+        ConstructionManager.buildOnTile += OnBuildOnTile;
+        ConstructionManager.destroyTileBuilding += OnDestroyTileBuilding;
     }
     private void OnDisable()
     {
         ConstructionManager.cursorStateChange -= OnPlacingStateChange;
         ConstructionManager.tileHover -= OnTileHover;
+        ConstructionManager.buildOnTile -= OnBuildOnTile;
+        ConstructionManager.destroyTileBuilding -= OnDestroyTileBuilding;
     }
 
     private void OnPlacingStateChange(CursorState newState)
@@ -39,14 +45,26 @@ public class GridTile : MonoBehaviour
         switch (newState)
         {
             case CursorState.Building:
-                tileRenderer.enabled = true;
+                //Enable this tile's rend/coll if not occupied.
+                ToggleTilePresence(!occupant);
                 break;
             case CursorState.Destroying:
+                //Enable this tile's rend/coll if this tile has an occupant.
+                ToggleTilePresence(occupant);
+                break;
+            case CursorState.Neutral:
+            default:
                 tileRenderer.enabled = false;
                 break;
-            default:
-                break;
         }
+    }
+
+    private void ToggleTilePresence(bool enabled)
+    {
+        //tileCollider.enabled = enabled;
+        tileCollider.enabled = enabled;
+
+        tileRenderer.enabled = enabled;
     }
 
     private void OnTileHover(GameObject tileHovered, bool hovered)
@@ -54,6 +72,26 @@ public class GridTile : MonoBehaviour
         if (tileHovered == gameObject)
         {
             tileRenderer.material = hovered ? selectedMat : unselectedMat;
+        }
+    }
+
+    private void OnBuildOnTile(GameObject tile, GameObject buildPrefab, Vector3 buildOffset)
+    {
+        //Only build if this tile is the one being built on *AND* is not already occupied
+        if (tile == gameObject && !occupant)
+        {
+            occupant = Instantiate(buildPrefab, transform);
+            occupant.transform.NegateParentScale();
+            occupant.transform.position += buildOffset;
+        }
+    }
+
+    private void OnDestroyTileBuilding(GameObject tile)
+    {
+        if (tile == gameObject && occupant)
+        {
+            Destroy(occupant);
+            occupant = null;
         }
     }
 
@@ -94,7 +132,15 @@ public class GridTile : MonoBehaviour
         }
     }
 
-    public GridTile GetAdjTile(GridDirection direction)
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Physics.IgnoreCollision(collision.collider, this.GetComponent<Collider>());
+        }
+    }
+
+        public GridTile GetAdjTile(GridDirection direction)
     {
         return tileAdj[direction];
     }
